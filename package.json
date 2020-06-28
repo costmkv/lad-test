@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/costmkv/lad-test/issues"
   },
-  "homepage": "https://github.com/costmkv/lad-test#readme"
+  "homepage": "https://github.com/costmkv/lad-test#readme",
+  "dependencies": {
+    "mongoose": "^5.9.20"
+  }
 }
