@@ -15,7 +15,7 @@ exports.auth = async() => {
 
 exports.getFileStream = async(fileId) => {
 	const response = await drive.files
-		.get({fileId, alt: 'media'}, {responseType: 'stream'});
+		.get({ fileId, alt: 'media' }, { responseType: 'stream' });
 
 	return response.data;
 };
