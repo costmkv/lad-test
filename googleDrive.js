@@ -6,7 +6,7 @@ const drive = google.drive('v3');
 
 exports.auth = async() => {
 	const localAuth = await authenticate({
-		keyfilePath: path.join(__dirname, './oauth2.keys.json'),
+		keyfilePath: path.join(__dirname, './credentials.json'),
 		scopes: ['https://www.googleapis.com/auth/drive'],
 	});
 
