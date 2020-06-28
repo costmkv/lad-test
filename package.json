@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/costmkv/lad-test#readme",
   "dependencies": {
-    "@google-cloud/local-auth": "^1.0.0",
-    "googleapis": "^52.1.0",
-    "mongoose": "^5.9.20"
+    "@google-cloud/local-auth": "1.0.0",
+    "csv": "5.3.2",
+    "googleapis": "52.1.0",
+    "mongoose": "5.9.20"
   }
 }
