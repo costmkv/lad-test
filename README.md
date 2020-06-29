@@ -12,8 +12,8 @@ Set the following values in credentials.json (up one directory) under the web ke
 }
 ```
 
-Run `index.js`
+Run `index.js` with MONGODB_URI
 ``` js
-node index.js
+MONGODB_URI='mongodb://127.0.0.1:27017/testMovies' node index.js
 ```
 Note: Node.js version 12

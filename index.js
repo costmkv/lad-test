@@ -1,22 +1,26 @@
 const db = require('./db');
 const googleDrive = require('./googleDrive');
 
+const { MONGODB_URI } = process.env;
 const { importRatings } = require('./ratings');
 const { importMovies, getBestMovies, printMovies } = require('./movies');
 
 (async () => {
 	try {
-		const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/testMovies';
-		await db.init(uri);
+		if (!MONGODB_URI) {
+			throw new Error('MONGODB_URI is required');
+		}
+
+		await db.init(MONGODB_URI);
 
 		await googleDrive.auth();
+		await Promise.all([importRatings(), importMovies()]);
 
-		// await importRatings();
 		const movies = await getBestMovies();
 		printMovies(movies);
-	}catch (e) {
-		throw new Error(e);
-	}finally {
+	} catch (e) {
+		throw e;
+	} finally {
 		db.close();
 	}
 })();
