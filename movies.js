@@ -3,10 +3,15 @@ const { importData } = require('./import');
 const config = require('./config');
 
 const transformer = ({ id, original_title }) =>
-	({ id: Number(id), original_title });
+	({ _id: Number(id), original_title });
 
 exports.importMovies = async() => {
-	await importData({ fileId: config.movieId, Model: models.movie, transformer });
+	await importData({
+		fileId: config.movieId,
+		Model: models.movie,
+		maxCounter: 19700,
+		transformer
+	});
 };
 
 exports.getBestMovies = async() => {
@@ -24,11 +29,21 @@ exports.getBestMovies = async() => {
 		$sort: { rating: -1 }
 	}, {
 		$limit: 10
+	}, {
+		$lookup: {
+			from: 'movies',
+			localField: '_id',
+			foreignField: '_id',
+			as: 'movieInfo'
+		}
 	}])
 };
 
-exports.printMovies = (movies) => {
+exports.printBestMovies = (movies) => {
 	for (let movie of movies) {
-		console.log(`${movie._id} ${movie.rating}`);
+		const title = movie.movieInfo.length ?
+			movie.movieInfo[0].original_title : '';
+
+		console.log(`${title} ${movie.rating}`);
 	}
 };

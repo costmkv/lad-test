@@ -3,7 +3,7 @@ const googleDrive = require('./googleDrive');
 
 const { MONGODB_URI } = process.env;
 const { importRatings } = require('./ratings');
-const { importMovies, getBestMovies, printMovies } = require('./movies');
+const { importMovies, getBestMovies, printBestMovies } = require('./movies');
 
 (async () => {
 	try {
@@ -17,7 +17,7 @@ const { importMovies, getBestMovies, printMovies } = require('./movies');
 		await Promise.all([importRatings(), importMovies()]);
 
 		const movies = await getBestMovies();
-		printMovies(movies);
+		printBestMovies(movies);
 	} catch (e) {
 		throw e;
 	} finally {
