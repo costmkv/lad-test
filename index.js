@@ -14,7 +14,12 @@ const { importMovies, getBestMovies, printBestMovies } = require('./movies');
 		await db.init(MONGODB_URI);
 
 		await googleDrive.auth();
+
+		console.log('Import files from google.drive');
+
 		await Promise.all([importRatings(), importMovies()]);
+
+		console.log('Google.drive files imported');
 
 		const movies = await getBestMovies();
 		printBestMovies(movies);
